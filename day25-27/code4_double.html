@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p id="time1"></p>
+    <p id="time2"></p>
+    <script type="text/javascript">
+      function getYMD(d) {
+        var year = d.getFullYear();
+        var month = d.getMonth() + 1;
+        var date = d.getDate();
+        month = checkTime(month);
+        date = checkTime(date);
+        YMD1 = year + "年" + month + "月" + date + "日";
+        YMD2 = year + "-" + month + "-" + date;
+        return { ymd1: YMD1, ymd2: YMD2 };
+      }
+
+      function getweekday(d) {
+        var weekday = new Array(7);
+        weekday[0] = "星期日";
+        weekday[1] = "星期一";
+        weekday[2] = "星期二";
+        weekday[3] = "星期三";
+        weekday[4] = "星期四";
+        weekday[5] = "星期五";
+        weekday[6] = "星期六";
+        return weekday[d.getDay()];
+      }
+
+      function gettime(d) {
+        var h = d.getHours();
+        var m = d.getMinutes();
+        var s = d.getSeconds();
+        h = checkTime(h);
+        m = checkTime(m);
+        s = checkTime(s);
+        var time1 = h + ":" + m + ":" + s;
+        var a;
+        if (h > 12) {
+          h -= 12;
+          a = "PM";
+        } else {
+          a = "AM";
+        }
+        var time2 = h + ":" + m + ":" + s + a;
+        return { t1: time1, t2: time2 };
+      }
+
+      function checkTime(i) {
+        if (i < 10) {
+          i = "0" + i;
+          return i;
+        }
+        return i;
+      }
+
+      function now() {
+        var d = new Date(); //要跟setTimeout()放在一起
+        document.getElementById("time1").innerHTML =
+          getYMD(d).ymd1 + " " + getweekday(d) + " " + gettime(d).t1;
+        document.getElementById("time2").innerHTML =
+          getYMD(d).ymd2 + " " + getweekday(d) + " " + gettime(d).t2;
+        setTimeout("now()", 1000);
+      }
+      now(); //调用
+    </script>
+  </body>
+</html>

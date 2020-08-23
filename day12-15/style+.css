@@ -1,0 +1,17 @@
+body{
+    margin: 0;
+    position: fixed;
+}
+.content{
+    display: flex;
+}
+.content-left{
+    flex:0 0 320px;
+    height: 1000px;
+    background-color: #37b7f7;
+}
+.content-right{
+    flex: 1;
+    height: 1000px;
+    background-color: #9999FF;
+}

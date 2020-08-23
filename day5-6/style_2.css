@@ -1,0 +1,26 @@
+#cc {
+    width: 20%;
+    height: 720px;
+    background-color: deepskyblue;
+    float: left;
+    text-align: center;
+    color: floralwhite;
+    padding-top: 5%;
+}
+#dd {
+    width: 75%;
+    height: 100%;
+    float: right;
+}
+#aa {
+    font-size: 22px;
+    font-weight: 600;
+}
+#bb {
+    text-align: left;
+}
+#ee {
+    width: 5%;
+    height: 720px;
+    float: left;
+}

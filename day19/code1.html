@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">    
+    <title>IFE ECMAScript</title>
+</head>
+<body>        
+    <div id="wrapper">
+        <div id="news-top" class="section">
+            <h3>Some title</h3>
+            <div class="content">
+                <ul>
+                    <li><span>HTML</span><a href="">Some Link1</a></li>
+                    <li><span>JS</span><a class="active" href="">Some Link2</a></li>
+                    <li><span>CSS</span><a href="">Some Link3</a></li>
+                    <li><span>JS</span><a href="">Some Link4</a></li>
+                </ul>
+            </div>
+            <img src="">
+            <p class="">Some Text</p>  
+        </div>
+        <div id="news-normal" class="section">
+            <h3>Some title</h3>
+            <div class="content">
+                <ul>
+                    <li><span>HTML</span><a href="">Some Link1</a></li>
+                    <li><span>HTML</span><a href="">Some Link2</a></li>
+                    <li><span>JS</span><a class="active" href="#">Some Link3</a></li>
+                    <li><span>CSS</span><a href="">Some Link4</a></li>
+                </ul>
+            </div>
+            <img src="">
+            <p class="">Some Text</p>
+        </div>      
+    </div>
+    <script>
+        // 在这个练习中仅允许使用以下 DOM 方法或属性，不得使用高级选择器
+        // getElementById()
+        // getElementsByTagName()
+        // childNodes
+        // parentNode
+
+    function getAllListItem() {
+        // 返回页面中所有li标签
+        var li = document.getElementsByTagName('li');
+        return li;
+    }
+    console.log(getAllListItem());
+
+    function findAllHtmlSpanInOneSection(sectionId) {
+        // 返回某个section下所有span中内容为HTML的span标签
+        var sect  = document.getElementById(sectionId);
+        var getspan = sect.getElementsByTagName('span');
+        var cont = []  //定义一个数组
+        for (var i = 0;i < getspan.length;i++) {
+            if (getspan[i].innerHTML == 'HTML') {
+                cont.push(getspan[i]);
+                //push()方法可向数组的末尾添加一个或多个元素，并返回新的长度
+            }
+        }
+        return cont;
+    }
+    console.log(findAllHtmlSpanInOneSection('news-top'));
+
+    function findListItem(sectionId, spanCont) {
+        // 返回某个section下，所有所包含span内容为spanCont的LI标签
+        var sect = document.getElementById(sectionId);
+        var getspan = sect.getElementsByTagName('span');
+        var cont = [];
+        for (var i = 0;i < getspan.length;i++) {
+            if (getspan[i].innerHTML == spanCont) {
+                cont.push(getspan[i].parentNode);
+            }
+        }
+        return cont;
+    }
+    console.log(findListItem('news-normal', 'CSS'));
+
+    function getActiveLinkContent(sectionId) {
+        // 返回某个section下，class为active的链接中包含的文字内容
+        var sect = document.getElementById(sectionId);
+        var geta = sect.getElementsByTagName('a');
+        var cont = [];
+        for (var i = 0;i < geta.length;i++) {
+            if (geta[i].className=="active") {
+                cont.push(geta[i].innerHTML);
+            }
+        }
+        return cont;
+    }
+    console.log(getActiveLinkContent('news-normal'));
+
+    </script>
+</body>
+</html>

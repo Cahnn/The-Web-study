@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        //var x = document.getElementById('NAME').value;
+        //var y = document.getElementById('ID').value;
+        //var result = document.getElementById('result');
+        var tree = {
+            "id": 0,
+            "name": "root",
+            "left": {
+                "id": 1,
+                "name": "Simon",
+                "left": {
+                    "id": 3,
+                    "name": "Carl",
+                    "left": {
+                        "id": 7,
+                        "name": "Lee",
+                        "left": {
+                            "id": 11,
+                            "name": "Fate"
+                        }
+                    },
+                    "right": {
+                        "id": 8,
+                        "name": "Annie",
+                        "left": {
+                            "id": 12,
+                            "name": "Saber"
+                        }
+                    }
+                },
+                "right": {
+                    "id": 4,
+                    "name": "Tony",
+                    "left": {
+                        "id": 9,
+                        "name": "Candy"
+                    }
+                }
+            },
+            "right": {
+                "id": 2,
+                "name": "right",
+                "left": {
+                    "id": 5,
+                    "name": "Carl",
+                },
+                "right": {
+                    "id": 6,
+                    "name": "Carl",
+                    "right": {
+                        "id": 10,
+                        "name": "Kai"
+                    }        
+                }
+            }
+        }
+
+    // 假设id和name均不会重复，根据输入name找到对应的id
+        function findIdByName(name) {
+            var id;
+            function findName(obj) {
+                if (obj != null) {
+                    if (obj.name == name) {
+                        id = obj.id;
+                        console.log(name+'的id是'+id);
+                    }  
+                    findName(obj.left);
+                    findName(obj.right);
+                }
+            }
+            findName(tree)
+        }
+        findIdByName('right')
+        console.log('  ')
+
+    // 假设id和name均不会重复，根据输入id找到对应的name
+        function findNameById(id) {
+            var name;
+            function findid(obj) {
+                if (obj != null) {
+                    if (obj.id == id) {
+                        name = obj.name;
+                        console.log('id为'+id+'的名字是'+name);
+                    }
+                    findid(obj.left);
+                    findid(obj.right);
+                }
+            }
+            findid(tree)
+        }
+        findNameById('8')
+        console.log(' ')
+
+
+    // 把这个对象中所有的名字以“前序遍历”的方式全部输出到console中
+
+    //对于当前节点，先输出该节点，然后输出他的左孩子，最后输出他的右孩子。
+        function getListWithDLR() {
+            function pretraversal(obj) {
+                if (obj != null) {
+                    console.log(obj.name)
+                    pretraversal(obj.left)
+                    pretraversal(obj.right)
+                }
+            }
+            pretraversal(tree)
+        }
+        getListWithDLR()
+        console.log(' ')
+
+    // 把这个对象中所有的名字以“中序遍历”的方式全部输出到console中
+
+    //对于当前结点，先输出它的左孩子，然后输出该结点，最后输出它的右孩子。
+        function getListWithLDR() {
+            function midtraversal(obj) {
+                if (obj != null) {
+                    midtraversal(obj.left)
+                    console.log(obj.name)
+                    midtraversal(obj.right)
+                }
+            }
+            midtraversal(tree)
+        }
+        getListWithLDR()
+        console.log('  ')
+
+    // 把这个对象中所有的名字以“后序遍历”的方式全部输出到console中
+
+    //对于当前结点，先输出它的左孩子，然后输出它的右孩子，最后输出该结点。
+        function getListWithLRD() {
+            function posttraversal(obj) {
+                if (obj != null) {
+                    posttraversal(obj.left)
+                    posttraversal(obj.right)
+                    console.log(obj.name)
+                }
+            }
+            posttraversal(tree)
+        }
+        getListWithLRD()
+    </script>
+</body>
+</html>

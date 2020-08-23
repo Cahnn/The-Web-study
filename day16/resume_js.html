@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>简历</title>
+</head>
+<style>
+    #cc {
+        width: 20%;
+        height: 770px;
+        background-color: deepskyblue;
+        float: left;
+        text-align: center;
+        color: floralwhite;
+        padding-top: 5%;
+    }
+
+    #dd {
+        width: 75%;
+        height: 100%;
+        float: right;
+    }
+
+    #aa {
+        font-size: 22px;
+        font-weight: 600;
+    }
+
+    #bb {
+        text-align: left;
+    }
+
+    #ee {
+        width: 5%;
+        height: 720px;
+        float: left;
+    }
+</style>
+
+<body>
+    <div id="cc">
+        <h1>简历</h1>
+        <p id="hello"></p>
+        <button type="button" onclick="document.getElementById('hello').innerHTML='你好'">
+            来打个招呼！
+        </button>
+    </div>
+    <div id="ee">
+        <p></p>
+    </div>
+    <div id="dd">
+        <p id="aa">基本信息</p>
+        <table>
+            <tr>
+                <th>姓名：</th>
+                <td>张三&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <th>性别：</th>
+                <td>男&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <th>应聘职位：</th>
+                <td>Web前端工程师</td>
+            </tr>
+        </table>
+        <p id="aa">联系方式</p>
+        <table>
+            <tr>
+                <th>手机：</th>
+                <td>12312341234&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <th>Email：</th>
+                <td><a href="#">joinefe@baidu.com</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <th>个人主页：</th>
+                <td><a href="#">GitHub</a></td>
+            </tr>
+        </table>
+        <p id="aa">能力描述</p>
+        <table>
+            <tr>
+                <th id="bb">技术能力</th>
+            </tr>
+            <tr>
+                <td>熟练掌握HTML,CSS,JavaScript</td>
+            </tr>
+            <tr>
+                <th id="bb">综合能力</th>
+            </tr>
+            <tr>
+                <td>良好的沟通能力，主动积极，努力勤奋 </td>
+            </tr>
+        </table>
+        <p id="aa">教育经历</p>
+        <table>
+            <tr>
+                <th id="bb">本科</th>
+            </tr>
+            <tr>
+                <td>百度前端技术学院小薇学院</td>
+            </tr>
+            <tr>
+                <th id="bb">研究生</th>
+            </tr>
+            <tr>
+                <td>百度前端技术学院大斌学院</td>
+            </tr>
+        </table>
+        <p id="aa">项目经历</p>
+        <table>
+            <tr>
+                <th id="bb">小度小度</th>
+            </tr>
+            <tr>
+                <td>作为前端工程师角色参与了ABC组件的开发</td>
+            </tr>
+            <tr>
+                <th id="bb">SAN Doc</th>
+            </tr>
+            <tr>
+                <td>作为文档工程师参与了SAN Doc编写</td>
+            </tr>
+        </table>
+        <p id="hobby"></p>
+        <button type="button" onclick="document.getElementById('hobby').innerHTML='吃喝睡'">
+            点我了解我的兴趣！
+        </button>
+        <script>
+            console.log('嗨');
+        </script>
+    </div>
+</body>
+
+</html>

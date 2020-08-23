@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input id="stack-input" type="text">
+    <p id="stack-cont">栈内容：apple-&gt;pear</p>    
+    <button id="push-btn">进栈</button>
+    <button id="pop-btn">退栈</button>
+    <button id="font-btn">打印栈顶元素内容</button>
+    <button id="empty-btn">判断栈是否为空</button>
+
+    <!-- 实现如阅读材料中，队列的相关进栈、退栈、获取栈顶、判空的操作
+    栈顶对应数组中最后一个元素
+    进栈和退栈操作后，需要在 id 为 stack-cont 的 p 标签中更新显示栈中的内容，栈顶在最右侧，中间用 -> 连接（练习使用数组的join方法） -->
+
+<script>
+    var stack = ["apple", "pear"];
+    var cont = document.getElementById('stack-input');
+
+    //按照后进先出规则，shift与unshift搭配使用，栈顶在数组头部；    push与pop搭配使用，栈顶在数组尾部。
+
+    document.getElementById('push-btn').onclick = function() {
+        stack.unshift(cont.value)
+        document.getElementById('stack-cont').innerHTML = '栈内容：'+stack.join('-&gt;');
+    }
+
+    document.getElementById('pop-btn').onclick = function() {
+        stack.shift()
+        document.getElementById('stack-cont').innerHTML = '栈内容：'+stack.join('-&gt;');
+    }
+
+    document.getElementById('font-btn').onclick = function() {
+        document.getElementById('stack-cont').innerHTML = '栈顶元素是；'+stack[0];
+    }
+
+    document.getElementById('empty-btn').onclick = function() {
+        if (stack.length == 0) {
+        document.getElementById('stack-cont').innerHTML = '栈内容为空';
+    } else {
+        document.getElementById('stack-cont').innerHTML = '栈内容不为空';
+    }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    .email-sug {
+      list-style-type: none;
+      margin: 0px;
+      padding: 0px;
+      width: 170px;
+      height: 30px;
+      line-height: 30px;
+      font-size: 14px;
+    }
+    li:hover {
+      background-color: burlywood;
+    }
+    .selected {
+      background-color: rgb(234, 255, 0);
+    }
+  </style>
+  <!-- 一进入页面就将焦点放在输入框中 -->
+  <body onload="javascript:document.all.email.focus();">
+    <div class="wrapper">
+      <!-- onclick='select()'实现单击输入框全选文本 -->
+      <input id="email-input" type="text" name="email" onclick="select()" />
+      <ul id="email-sug-wrapper" class="email-sug"></ul>
+    </div>
+
+    <script>
+      var postfixList = [
+        "163.com",
+        "gmail.com",
+        "126.com",
+        "qq.com",
+        "263.net",
+      ];
+      var inputDOM = document.getElementById("email-input");
+      var ul = document.getElementById("email-sug-wrapper");
+      var nowSelectTipIndex = 0; //用于存储当前选中的提示li的序号
+
+      inputDOM.addEventListener("keyup", function (event) {
+        var event = event || window.event;
+
+        if (event.keyCode != 38 && event.keyCode != 40 && event.keyCode != 13) {
+          ResetState();
+        }
+
+        var lilist = ul.childNodes;
+
+        if (event.keyCode == 38) {
+          if (nowSelectTipIndex == 0) {
+            nowSelectTipIndex = lilist.length - 1;
+          } else {
+            nowSelectTipIndex--;
+          }
+        }
+
+        if (event.keyCode == 40) {
+          if (nowSelectTipIndex == lilist.length - 1) {
+            nowSelectTipIndex = 0;
+          } else {
+            nowSelectTipIndex++;
+          }
+        }
+
+        getuserinput();
+        AddProcontToEmailsug();
+        ctrl();
+
+        if (event.keyCode == 13) {
+          inputDOM.value = lilist[nowSelectTipIndex].innerText;
+          hide();
+        }
+      });
+
+      function ResetState() {
+        nowSelectTipIndex = 0;
+      }
+
+      ul.onclick = function (e) {
+        var eve = e || window.event;
+        var target = eve.target || eve.srcElement;
+        if (target.nodeName.toUpperCase() == "LI") {
+          inputDOM.value = target.innerHTML;
+          hide();
+        }
+      };
+
+      function getuserinput() {
+        //拿到input输入框的输入内容trim后返回
+        return inputDOM.value.trim();
+      }
+
+      function getpromptcontent() {
+        var input = getuserinput(); //获取用户输入
+        var promptli = new Array();
+        var prestr, sufstr;
+        var find = false; //标记输入框@后面的字符与列表中的元素是否匹配
+        if (input.indexOf("@") == -1) {
+          prestr = input;
+        } else {
+          prestr = input.slice(0, input.indexOf("@"));
+          sufstr = input.slice(input.indexOf("@") + 1);
+        }
+        //遍历postfixList
+        for (var i = 0; i < postfixList.length; i++) {
+          //把用户输入和每一个postfix进行结合成为每一个Li
+          if (postfixList[i].indexOf(sufstr) == 0) {
+            //如果列表中的元素内容与sufstr相符
+            promptli[i] = document.createElement("li");
+            promptli[i].innerHTML = prestr + "@" + postfixList[i];
+            find = true;
+          }
+        }
+        if (find == false) {
+          for (var i = 0; i < postfixList.length; i++) {
+            promptli[i] = document.createElement("li");
+            promptli[i].innerHTML = prestr + "@" + postfixList[i];
+          }
+        }
+
+        //删除数组中的空元素
+        for (var i = 0; i < promptli.length; i++) {
+          if (typeof promptli[i] == "undefined" || promptli[i] == "") {
+            promptli.splice(i, 1); //删除i号位1个元素
+            i--;
+          }
+        }
+        promptli[nowSelectTipIndex].className = "selected";
+        return promptli;
+      }
+
+      function AddProcontToEmailsug() {
+        //获取生成提示框中的提示内容
+        //将内容添加到email-sug-wrapper中
+        var procont = getpromptcontent();
+        var len = ul.childNodes.length; //获取ul元素的子节点集合
+
+        for (var i = 0; i < procont.length; i++) {
+          ul.appendChild(procont[i]); //添加新的子节点
+        }
+        //每添加一个字符清除一次子节点，以防累加
+        for (var i = len - 1; i >= 0; i--) {
+          ul.removeChild(ul.childNodes[i]);
+        }
+      }
+
+      function ctrl() {
+        var x = getuserinput();
+        if (x == "") {
+          hide();
+        } else {
+          show();
+        }
+      }
+
+      function hide() {
+        //做具体隐藏提示框的操作;
+        ul.style.display = "none";
+      }
+
+      function show() {
+        //做具体显示提示框的操作;
+        ul.style.display = "block";
+      }
+    </script>
+  </body>
+</html>

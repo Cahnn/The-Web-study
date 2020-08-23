@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The multiplication table</title>
+</head>
+<body onload="myFunction">
+    <script>
+        for (n = 1;n <= 9;n++) {
+            for (m = 1;m <= n;m++) {
+                console.log(m+'*'+n+'='+m*n)
+            }
+        }
+    </script>
+    <table id="table" border="1px"></table>
+    <script>
+        function myFunction() {
+            var t = document.getElementById("table");
+            for (n = 1;n <= 9;n++) {
+                var tr = document.createElement("tr");  
+                // tr元素定义表格行
+                for (m = 1;m <= n;m++) {
+                    var td = document.createElement("td");
+                    // td元素定义表格单元
+                    var node = document.createTextNode(m + "*" + n + "=" + m * n);
+                    td.appendChild(node);
+                    tr.appendChild(td);
+                    t.appendChild(tr);  
+                    // appendChild() 创建指定文本的表格单元
+                }
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input id="name" type="text" onkeydown="keyDown()">  
+     <!-- onkeydown 事件会在用户按下一个键盘按键时发生  -->
+    <button id="submit-btn" onclick="myfunction()">Submit</button>
+    <script>
+        function keyDown() {
+            switch(event.key) {    //event.key 事件按键
+                case 'Enter':
+                myfunction();
+                break;
+                case 'Escape':
+                document.getElementById('name').value='';
+                break;
+            }       
+        }
+        function myfunction() {
+            console.log(document.getElementById('name').value);
+        }
+    </script>
+</body>
+</html>

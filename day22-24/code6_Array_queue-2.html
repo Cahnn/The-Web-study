@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input id="queue-input" type="text">
+    <p id="queue-cont">队列内容：apple-&gt;pear</p>    
+    <button id="in-btn" onclick="inline()">入队</button>
+    <button id="out-btn" onclick="outline()">出队</button>
+    <button id="font-btn" onclick="printtopcont()">打印队头元素内容</button>
+    <button id="empty-btn" onclick="judge()">判断队列是否为空</button>
+    
+<script>
+var queue = ["apple", "pear"];
+var cont = document.getElementById('queue-input');
+
+//给数组添加新值的方法：
+//1、push()向数组的末尾添加一个或更多元素，并返回新的长度。
+//2、unshift() 向数组的开头添加一个或更多元素，并返回新的长度。
+//3、splice() 删除元素，并向数组添加新元素。
+function inline() {
+    queue.push(cont.value);
+    document.getElementById('queue-cont').innerHTML = '队列内容：'+queue.join('-&gt;');
+}
+
+function outline() {
+    for (var i=0;i<queue.length;i++) {
+        if (queue.indexOf(cont.value) == i) {
+            queue.splice(i,1);
+            document.getElementById('queue-cont').innerHTML = '队列内容：'+queue.join('-&gt;');
+            return;
+        } 
+    }
+    alert('数组没有这个元素')
+    
+}
+
+function printtopcont() {
+    document.getElementById('queue-cont').innerHTML = '对头元素内容：'+queue[0];
+}
+
+function judge() {
+    if (queue.length == 0) {
+        document.getElementById('queue-cont').innerHTML = '队列内容为空';
+    } else {
+        document.getElementById('queue-cont').innerHTML = '队列内容不为空';
+    }
+}
+</script>
+</body>
+</html>

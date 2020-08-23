@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .big1-1{
+        width: 100%;
+        height: 200px;
+    }
+    .left1-1{
+        width: 30%;
+        height: 200px;
+        float: left;
+        background: rgb(123, 123, 218);
+    }
+    .right1-1{
+        width: 70%;
+        height: 200px;
+        background: navajowhite;
+        float: left;
+    }
+    .big1-2{
+        width: 100%;
+        height: 200px;
+        display: flex;
+        
+    }
+    .left1-2{
+        height: 200px;
+        flex: 0 0 30%;
+        background:rgb(123, 123, 218);
+    }
+    .right1-2{
+        flex: 70%;
+        height: 200px;
+        display: inline-block;
+        background: navajowhite;
+    }
+    .big1-3{
+        width: 100%;
+        height: 200px;
+    }
+    .left1-3,.right1-3{
+        position: absolute;
+    }
+    .left1-3{
+        left: 0;
+        width: 30%;
+        height: 200px;
+        background-color: rgb(123, 123, 218);
+    }
+   .right1-3{
+        left: 30%;
+        width: 70%;
+        height: 200px;
+        background-color: navajowhite;
+    } 
+    .big2-1{
+        display: flex;
+    }
+    .left2-1{
+        flex: 0 0 200px;
+        height: 200px;
+        background: salmon;
+    }
+    .right2-1{
+        flex: 1;
+        height: 200px;
+        background: seagreen;
+    }
+    .big2-2{
+        overflow: hidden;
+         }
+    .left2-2{
+        float: left;
+        width:200px;
+        height: 200px; 
+        background: salmon;
+        }
+    .right2-2{
+        margin-left:200px;
+        height:200px;
+        background: seagreen;
+        }
+    .big2-2{
+        box-sizing: content-box;
+    }
+    .left2-3{
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        background: salmon;
+    }
+    .right2-3{
+        margin-left: 200px;
+        width: auto;
+        height: 200px;
+        background: seagreen;
+    }
+    .big3-1{
+            display: flex;
+    }
+    .left3-1{
+            flex: 1;
+            height: 200px;
+            background: hotpink;
+    }
+    .right3-1{
+            flex: 0 0 200px;
+            height: 200px;
+            background: rgb(123, 58, 170);
+    }
+    .big3-2{
+        margin: 0 0 10px;
+    }
+    .left3-2{
+        float: left;
+        width: 100%;
+        background: hotpink;
+        height: 200px;
+    }
+    .right3-2{
+        position: relative;
+        float: right;
+        width: 200px;
+        margin-left: -200px;
+        background: rgb(123, 58, 170);
+        height: 200px;
+    }
+    .big3-3{
+        width: 100%;
+        height: 200px;
+        position: relative;
+        background: blue;
+    }
+    .left3-3{
+        background:red;
+        height: 200px;
+        width: 100%;
+        float: left;
+        margin-left: -200px;
+    }
+    .right3-3{
+        width: 200px;
+        background: salmon;
+        height: 200px;
+        float: right;
+    }
+    /* html,body{margin: 0;height: 100%;} */
+    .left4-1,.right4-1{ 
+        width: 200px;
+        height: 200px;
+        background: sienna;
+        }
+    .left4-1{
+        float: left;
+        }
+    .right4-1{
+        float: right;
+        }
+    .middle4-1{
+        height: 200px;
+        margin: 0 200px;
+        background: seagreen;
+        }
+    .big4-2{
+        display: flex;
+    }
+    .left4-2{
+        flex: 0 0 200px;
+        height: 200px;
+        background: sienna;
+    }
+    .right4-2{
+        flex: 0 0 200px;
+        height: 200px;
+        background: sienna;
+    }
+    .middle4-2{
+        flex: 1;
+        height: 200px;
+        background: seagreen;
+    }
+    body{padding:0;margin:0;}
+        .big4-3{
+            padding-left:150px;
+            padding-right:190px;
+            height: 200px;
+        }
+        .left4-3{
+            background: sienna;
+            width:200px;
+            float:left;
+            margin-left:-100%;
+            position: relative;
+            left:-150px;
+            height: 200px;
+        }
+        .middle4-3{
+            background: seagreen;
+            width:100%;
+            float:left;
+            height: 200px;
+ 
+        }
+        .right4-3{
+            background: sienna;
+            width:190px;
+            float:left;
+            margin-left:-190px;
+            position:relative;
+            right:-190px;
+            height: 200px;
+        }
+    .big5-1{
+        display: flex;
+    }
+    .left5-1{
+        flex: 0 0 190px;
+        height: 200px;
+        background: maroon;
+    }
+    .middle5-1{
+        flex: 0 0 290px;
+        height: 200px;
+        background: mediumslateblue;
+    }
+    .right5-1{
+        flex: 1;
+        height: 200px;
+        background: mediumspringgreen;
+    }
+    .big5-2 {
+        height: 200px;
+        margin:0 auto;
+        width: 100%;
+    }
+    .left5-2{
+        height: 200px;
+        width: 200px;
+        float: left;
+        background: maroon;
+    }
+    .middle5-2{
+        height: 200px;
+        background: mediumslateblue;
+        width: 200px;
+        float: left;
+    }
+    .right5-2{
+        height: 200px;
+        background: mediumspringgreen;
+        width: 100%;
+    }
+    .big5-3-1{
+    	width: 400px;
+    	height: 200px;
+    	float: left;
+    }
+    .left5-3,.middle5-3{
+    	height: 200px;
+    	float: left;
+    	width: 200px;
+    }
+    .left5-3{
+    	background: maroon;
+    }
+    .middle5-3{
+    	background: mediumslateblue;
+    }
+    .big{
+    	width: calc(100%-400px);
+    	float: left;
+    }
+    .right5-3{
+    	width: auto;
+    	height: 200px;
+    	background: mediumspringgreen;
+    }
+    
+</style>
+<body>
+    <p><strong>实现一个两栏布局，左侧占30%宽度，右侧占70%宽度</strong></p>
+    <p>Float</p>
+    <div class="big1-1">
+        <div class="left1-1">我是一个占宽30%的左侧盒子</div>
+        <div class="right1-1">我是一个占宽70%的右侧盒子</div>
+    </div>
+    <hr>
+    <p>Flex</p>
+    <div class="big1-2">
+        <div class="left1-2">我是一个占宽30%的左侧盒子</div>
+        <div class="right1-2">我是一个占宽70%的右侧盒子</div>
+    </div>
+    <hr>
+    <P>Position</P>
+    <div class="big1-3">
+        <div class="left1-3">我是一个占宽30%的左侧盒子</div>
+        <div class="right1-3">我是一个占宽70%的右侧盒子</div>
+    </div>
+    <hr>
+    <p><strong>实现一个两栏布局，左侧固定宽度，右侧根据浏览器宽度进行自适应变化</strong></p>
+    <p>Flex</p>
+    <div class="big2-1">
+        <div class="left2-1">这是一个固定宽度的左侧盒子</div>
+        <div class="right2-1">这是一个根据浏览器宽度进行自适应变化的右侧盒子</div>
+    </div>
+    <hr>
+    <p>Float</p>
+    <div class="big2-2">
+        <div class="left2-2">这是一个固定宽度的左侧盒子</div>
+        <div class="right2-2">这是一个根据浏览器宽度进行自适应变化的右侧盒子</div>
+    </div>
+    <hr>
+    <p>Position</p>
+    <div class="big2-3">
+        <div class="left2-3">这是一个固定宽度的左侧盒子</div>
+        <div class="right2-3">这是一个根据浏览器宽度进行自适应变化的右侧盒子</div>
+    </div>
+    <hr>
+    <p><strong>实现一个两栏布局，右侧固定宽度，左侧根据浏览器宽度进行自适应变化</strong></p>
+    <p>Flex</p>
+    <div class="big3-1">
+        <div class="left3-1">我是一个随浏览器宽度自适应变化的左侧盒子</div>
+        <div class="right3-1">我是一个固定宽度的右侧盒子</div>
+    </div>
+    <hr>
+    <p>Float</p>
+    <div class="big3-2">
+        <div class="left3-2">我是一个随浏览器宽度自适应变化的左侧盒子</div>
+        <div class="right3-2">我是一个固定宽度的右侧盒子</div>
+    </div>
+    <hr>
+    <p>Position</p>
+    <div class="big3-3">
+        <div class="left3-3">我是一个随浏览器宽度自适应变化的左侧盒子</div>
+        <div class="right3-3">我是一个固定宽度的右侧盒子</div>
+    </div>
+    <hr>
+    <p><strong>实现一个三栏布局，左侧固定宽度，右侧固定宽度，中间部分宽度随浏览器宽度变化而自适应变化</strong></p>
+    <p>Float</p>
+    <div class="big4-1">
+        <div class="left4-1">我是一个左侧固定宽度的盒子</div>    
+        <div class="right4-1">我是一个右侧固定宽度的盒子</div>
+        <div class="middle4-1">我是宽度随浏览器变化而自适应变化的中间盒子</div>   
+    </div>
+    <hr>
+    <p>Flex</p>
+    <div class="big4-2">
+        <div class="left4-2">我是一个左侧固定宽度的盒子</div>
+        <div class="middle4-2">我是宽度随浏览器变化而自适应变化的中间盒子</div>
+        <div class="right4-2">我是一个右侧固定宽度的盒子</div> 
+    </div>
+    <hr>
+    <p>圣杯布局</p>
+    <div class= "big4-3">
+        <div class= "middle4-3">我是宽度随浏览器变化而自适应变化的中间盒子</div>
+        <div class= "left4-3">我是一个左侧固定宽度的盒子</div>
+        <div class= "right4-3">我是一个右侧固定宽度的盒子</div>
+    </div>
+    
+    <hr>
+    <p><strong>实现一个三栏布局，左侧固定宽度，中间固定宽度，右侧根据浏览器宽度变化而自适应变化</strong></p>
+    <p>Flex</p>
+    <div class="big5-1">
+        <div class="left5-1">我是一个固定宽度的左侧盒子</div>
+        <div class="middle5-1">我是一个固定宽度的中间盒子</div>
+        <div class="right5-1">我是一个根据浏览器宽度变化而自适应变化的右侧盒子</div>    
+    </div>
+    <hr>
+    <p>Float</p>
+    <div class="big5-2">
+        <div class="left5-2">我是一个左侧固定宽度的盒子</div>   
+        <div class="middle5-2">我是固定宽度的中间盒子</div> 
+        <div class="right5-2">我是一个右侧自适应的盒子</div>        
+    </div>
+    <hr>
+    <p>Float+cala()</p>
+    <div class="big5-3-1">
+        <div class="left5-3">我是一个固定宽度的左侧盒子</div> 
+        <div class="middle5-3">我是一个固定宽度的中间盒子</div> 
+    </div>
+    <div class="big5-3-2">    
+        <div class="right5-3">我是自适应的右侧盒子</div>       
+    </div>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>动态修改css样式方法</title>
+</head>
+<style>
+    .style1{margin:10px auto ;background-color:#9999FF; display:block;color:White; border:1px solid white; padding:10px 25px; font-size:18px; }
+    .style1:hover{ background-color:#66B3FF; cursor:pointer;} 
+    .style2{margin:10px auto ;background-color:gray; display:block;color:black; border:1px solid white; padding:10px 25px; font-size:18px; } 
+    .style2:hover{ background-color:black; color:White; cursor:pointer}
+</style>
+<body>
+    <div>
+        <input id="btnB" type="button" name="btnLogin" value="登录" class="style1" />
+        <div id="tool">
+         <input type="button" value="【obj.style.className】更改样式" onclick="changeStyle1()"/>
+         <input type="button" value="【obj.style.cssText】更改样式" onclick="changeStyle2()" />
+         <input type="button" value="【obj.className】更改样式" onclick="changeStyle3()" />
+         <input type="button" value="更改外联css样式" onclick="changeStyle4()" />
+        </div>
+    </div>
+    <script>
+        function changeStyle1() {
+            var obj = document.getElementById('btnB');
+            obj.style.backgroundColor = 'black';
+        }
+
+        function changeStyle2() {
+            var obj = document.getElementById('btnB');
+            obj.style.cssText = 'display:block;color:red';
+        }
+
+        function changeStyle3() {
+            var obj = document.getElementById('btnB');
+            obj.className = 'style2'
+            obj.setAttribute('class','style2')
+            //elementNode.setAttribute(name,value)创建或改变某个新属性  
+            //name规定要设置的属性名，value规定要设置的属性值
+        }
+
+        // <link href="css1.css" rel="stylesheet" type="text/css" id="css"/>
+        // function changeStyle4() {
+        //     var obj = document.getElementById("css");
+        //     obj.setAttribute("href","css2.css");
+        // }
+    </script>
+</body>
+</html>

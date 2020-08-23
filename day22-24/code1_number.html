@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <label>Number A:<input id="radio-a" type="radio" name="math-obj" value="a"></label><input id="num-a" type="text">
+        <label>Number B:<input id="radio-b" type="radio" name="math-obj" value="b"></label><input id="num-b" type="text">
+    </div>
+    <div>
+        <button onclick="btn1()">判断当前选中的输入框输入内容是否为数字</button> <br>
+        <button onclick="btn2()">把 A 四舍五入为 B 个小数位数的数字</button> <br>
+        <button onclick="btn3()">当前选中数字的绝对值</button> <br>
+        <button onclick="btn4()">对当前选中的数字进行上舍入</button> <br>
+        <button onclick="btn5()">对当前选中的数字进行下舍入</button> <br>
+        <button onclick="btn6()">把当前选中的数字四舍五入为最接近的整数</button> <br>
+        <button onclick="btn7()">返回 A 和 B 中的最高值</button> <br>
+        <button onclick="btn8()">返回 A 和 B 中的最低值</button>     <br>    
+    </div>
+    <p id="result"></p>
+    <script type="text/javascript">
+        function btn1() {
+            var radios = document.getElementsByName('math-obj');
+            var find = false;    //标记是否找到
+            for (var i = 0;i < radios.length;i++) {
+                if (radios[i].checked == true) {
+                    find = true;
+                }
+            } 
+            if (find == false) {
+                alert('unselected');
+                return;
+            }
+            var select = document.getElementById('radio-a');
+            if (select.checked == true) {
+                var num = document.getElementById('num-a');
+                if (num.value == '') {
+                    document.getElementById('result').innerText = '请输入内容';
+                } else {
+                    if (isNaN(num.value)) {
+                        document.getElementById('result').innerText = num.value + '不是数字';
+                    } else {
+                        document.getElementById('result').innerText = num.value + '是数字';
+                    }
+                }  
+            } else {
+                var num = document.getElementById('num-b');
+                if (num.value == '') {
+                    document.getElementById('result').innerText = '请输入字符';
+                } else {
+                    if (isNaN(num.value)) {
+                        document.getElementById('result').innerText = num.value + '不是数字';
+                    } else {
+                        document.getElementById('result').innerText = num.value + '是数字';
+                    }
+                }
+            }  
+        }
+
+        function btn2() {
+            var num1 = document.getElementById('num-a').value;
+            var num2 = document.getElementById('num-b').value;
+            if (isNaN(num1) || isNaN(num2)) {     
+                return console.log('两个输入框都需要输进数字，输入错误');;
+            } 
+            document.getElementById('result').innerHTML = parseFloat(num1).toFixed(parseInt(num2));
+        }
+
+        function btn3() {
+            var radios = document.getElementsByName('math-obj');
+            var find = false;    //标记是否找到
+            for (var i = 0;i < radios.length;i++) {
+                if (radios[i].checked == true) {
+                    find = true;
+                }
+            } 
+            if (find == false) {
+                alert('unselected');
+                return;
+            }
+            var select = document.getElementById('radio-a');
+            if (select.checked==true) {
+                var num1 = document.getElementById('num-a').value;
+                if (isNaN(num1)) {
+                    return console.log('输入的不是数字');
+                }
+                document.getElementById('result').innerHTML = Math.abs(num1);
+            } else {
+                var num2 = document.getElementById('num-b').value;
+                if (isNaN(num2)) {
+                    return console.log('输入的不是数字');
+                }
+                document.getElementById('result').innerHTML = Math.abs(num2);
+            }
+        }
+
+        function btn4() {
+            var radios = document.getElementsByName('math-obj');
+            var find = false;    //标记是否找到
+            for (var i = 0;i < radios.length;i++) {
+                if (radios[i].checked == true) {
+                    find = true;
+                }
+            } 
+            if (find == false) {
+                alert('unselected');
+                return;
+            }
+            var select = document.getElementById('radio-a');
+            if (select.checked==true) {
+                var num1 = document.getElementById('num-a').value;
+                if (isNaN(num1)) {
+                    return console.log('输入的不是数字');
+                }
+                document.getElementById('result').innerHTML = Math.ceil(num1);
+            } else {
+                var num2 = document.getElementById('num-b').value;
+                if (isNaN(num2)) {
+                    return console.log('输入的不是数字');
+                }
+                document.getElementById('result').innerHTML = Math.ceil(num2);
+            }
+        }
+        function btn5() {
+            var radios = document.getElementsByName('math-obj');
+            var find = false;    //标记是否找到
+            for (var i = 0;i < radios.length;i++) {
+                if (radios[i].checked == true) {
+                    find = true;
+                }
+            } 
+            if (find == false) {
+                alert('unselected');
+                return;
+            }
+            var select = document.getElementById('radio-a');
+            if (select.checked==true) {
+                var num1 = document.getElementById('num-a').value;
+                if (isNaN(num1)) {
+                    return console.log('输入的不是数字');
+                }
+                document.getElementById('result').innerHTML = Math.floor(num1);
+            } else {
+                var num2 = document.getElementById('num-b').value;
+                if (isNaN(num2)) {
+                    return console.log('输入的不是数字');
+                }
+                document.getElementById('result').innerHTML = Math.floor(num2);
+            }
+        }
+
+        function btn6() {
+            var radios = document.getElementsByName('math-obj');
+            var find = false;    //标记是否找到
+            for (var i = 0;i < radios.length;i++) {
+                if (radios[i].checked == true) {
+                    find = true;
+                }
+            } 
+            if (find == false) {
+                alert('unselected');
+                return;
+            }
+            var select = document.getElementById('radio-a');
+            if (select.checked==true) {
+                var num1 = document.getElementById('num-a').value;
+                if (isNaN(num1)) {
+                    return console.log('输入的不是数字');
+                }
+                document.getElementById('result').innerHTML = Math.round(num1);
+            } else {
+                var num2 = document.getElementById('num-b').value;
+                if (isNaN(num2)) {
+                    return console.log('输入的不是数字');
+                }
+                document.getElementById('result').innerHTML = Math.round(num2);
+            }
+        }
+
+        function btn7() {
+            var num1 = document.getElementById('num-a').value;
+            var num2 = document.getElementById('num-b').value;
+            if (isNaN(num1) || isNaN(num2)) {     
+                return console.log('两个输入框都需要输进数字，输入错误');;
+            } 
+            document.getElementById('result').innerHTML = Math.max(num1,num2);
+        }
+
+        function btn8() {
+            var num1 = document.getElementById('num-a').value;
+            var num2 = document.getElementById('num-b').value;
+            if (isNaN(num1) || isNaN(num2)) {     
+                return console.log('两个输入框都需要输进数字，输入错误');;
+            } 
+            document.getElementById('result').innerHTML = Math.min(num1,num2);
+        }
+    </script>
+</body>
+</html>

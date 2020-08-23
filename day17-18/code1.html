@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">    
+    <title>IFE ECMAScript</title>
+</head>
+<body>        
+    <input id="first-number" type="number" value="0" placeholder="第一个数字">
+    <input id="second-number" type="number" value="0" placeholder="第二个数字">
+    <button id="add-btn">加</button>
+    <button id="minus-btn">减</button>
+    <button id="times-btn">乘</button>
+    <button id="divide-btn">除</button>
+    <p>运算结果:<span id="result">0</span></p>
+    <script>
+        function add() {
+            var a = document.getElementById('first-number').value
+            var b = document.getElementById('second-number').value
+            document.getElementById('result').innerText = Number(a) + Number(b)
+        }
+        document.getElementById('add-btn').onclick = add
+
+        document.getElementById('minus-btn').onclick = function() {
+            var a = document.getElementById('first-number').value
+            var b = document.getElementById('second-number').value
+            document.getElementById('result').innerText = a - b
+        }
+        
+        document.getElementById('times-btn').onclick = function() {
+            var a = document.getElementById('first-number').value
+            var b = document.getElementById('second-number').value
+            document.getElementById('result').innerHTML = a * b
+        }
+
+        document.getElementById('divide-btn').onclick = function() {
+            var a = document.getElementById('first-number').value
+            var b = document.getElementById('second-number').value
+            if (b == 0) {
+                console.log('被除数不能为0')
+                document.getElementById('result').innerHTML = '按F12查看错误信息'
+            } else {
+                document.getElementById('result').innerHTML = a / b
+            }
+            
+        }
+    </script>
+</body>
+</html>

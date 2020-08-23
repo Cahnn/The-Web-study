@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    .email-sug {
+      list-style-type: none;
+      margin: 0px;
+      padding: 0px;
+      width: 200px;
+      height: 30px;
+      line-height: 30px;
+      font-size: 14px;
+    }
+    li:hover {
+      background-color: burlywood;
+    }
+    /* 定义被选中的样式 */
+    .selected {
+      background-color: rgb(116, 223, 231);
+    }
+  </style>
+  <body>
+    <div class="wrapper">
+      <input id="email-input" type="text" />
+      <ul id="email-sug-wrapper" class="email-sug"></ul>
+    </div>
+
+    <script>
+      var postfixList = [
+        "163.com",
+        "gmail.com",
+        "126.com",
+        "qq.com",
+        "263.net",
+      ];
+      var inputDOM = document.getElementById("email-input");
+      var ul = document.getElementById("email-sug-wrapper");
+      var selected = 0;
+      var selectedli = null;
+
+      inputDOM.onkeyup = function (event) {
+        var event = event || window.event; //实现浏览器的兼容
+        getuserinput();
+        AddProcontToEmailsug();
+        ctrl();
+        if (event.keyCode != 13 && event.keyCode != 38 && event.keyCode != 40) {
+          ResetState();
+        }
+
+        var lilist = ul.querySelectorAll("li"); //获取li列表
+
+        if (selectedli == null) {
+          //如果还没有已经选中的li，则选取第一个li为已选中的li
+          selectedli = ul.querySelector("li:first-child");
+          selectedli.classList.add("selected"); //为元素添加class
+        }
+
+        for (var i = 0; i < lilist.length; i++) {
+          //getAttribute()方法通过名称获取属性的值,匹配出被选择的li，标记其索引号和此li标签
+          if (lilist[i].getAttribute("class") == "selected") {
+            selected = i;
+            selectedli = lilist[i];
+          }
+        }
+
+        //如果按下向上键
+        if (event.keyCode == 38) {
+          selectedli.classList.remove("selected"); //先移除被选择li的类名
+          if (selected != 0) {
+            //被选中的不是第一个的情况下
+            selectedli = lilist[--selected]; //'--' 递减  按向上键则递减一位
+            selectedli.classList.add("selected"); //为元素添加class
+          } else {
+            //选中的li是第一个的情况下
+            selectedli = lilist[lilist.length - 1]; //向上按则为最后一个
+            selectedli.classList.add("selected");
+            selected = lilist.length - 1; //更改selected的值
+          }
+        }
+
+        //如果按的是向下键
+        if (event.keyCode == 40) {
+          selectedli.classList.remove("selected"); //首先清除当前选中li的类名
+          if (selected != lilist.length - 1) {
+            //如果被选中的不是最后一个
+            selectedli = lilist[++selected]; //'++'递加
+            selectedli.classList.add("selected");
+          } else {
+            //如果是最后一个
+            selectedli = lilist[0]; //按向下键选中的就是第一个啦
+            selectedli.classList.add("selected");
+            selected = 0; //重新定义selected的值
+          }
+        }
+
+        //回车键
+        if (event.keyCode == 13) {
+          //textContent 属性设置或者返回指定节点的文本内容。
+          inputDOM.value = selectedli.textContent;
+          hide(); //Enter后隐藏提示框
+        }
+      };
+
+      function ResetState() {
+        var firstli = ul.querySelector("li:first-child"); //ul中的第一个li
+        var selectedli = ul.querySelector("li.selected"); //当前为选中状态的li
+        if (selectedli != null) {
+          if (firstli != selectedli) {
+            //如果选中的li不是第一个，
+            selectedli.classList.remove("selected");
+            firstli.classList.add("selected");
+          }
+        } else {
+          firstli.classList.add("selected");
+        }
+      }
+
+      ul.onclick = function (e) {
+        var eve = e || window.event; //兼容IE和其他浏览器
+        var target = eve.target || eve.srcElement; //兼容IE和FireFox浏览器
+        if (target.nodeName.toUpperCase() == "LI") {
+          inputDOM.value = target.innerHTML;
+          hide();
+        }
+      };
+
+      function getuserinput() {
+        //拿到input输入框的输入内容trim后返回
+        return inputDOM.value.trim();
+      }
+
+      function getpromptcontent() {
+        //获取用户输入
+        //遍历postfixList
+        var input = getuserinput();
+        var promptli = new Array();
+        var prestr, sufstr;
+        var find = false; //标记输入框@后面的字符与列表中的元素是否匹配
+        if (input.indexOf("@") == -1) {
+          prestr = input;
+        } else {
+          prestr = input.slice(0, input.indexOf("@"));
+          sufstr = input.slice(input.indexOf("@") + 1);
+        }
+        for (var i = 0; i < postfixList.length; i++) {
+          //把用户输入和每一个postfix进行结合成为每一个Li
+          if (postfixList[i].indexOf(sufstr) == 0) {
+            //如果列表中的元素内容与sufstr相符
+            promptli[i] = prestr + "@" + postfixList[i];
+            find = true;
+          }
+        }
+        if (find == false) {
+          for (var i = 0; i < postfixList.length; i++) {
+            promptli[i] = prestr + "@" + postfixList[i];
+          }
+        }
+        for (var i = 0; i < promptli.length; i++) {
+          if (typeof promptli[i] == "undefined" || promptli[i] == "") {
+            //删除数组中的空元素
+            promptli.splice(i, 1); //删除i号位1个元素
+            i--;
+          }
+        }
+        return promptli;
+      }
+
+      function AddProcontToEmailsug() {
+        //获取生成提示框中的提示内容
+        //将内容添加到email-sug-wrapper中
+        var procont = getpromptcontent();
+        var len = ul.childNodes.length; //获取ul元素的子节点集合
+
+        for (var i = 0; i < procont.length; i++) {
+          var li = document.createElement("li"); //创建一个li标签
+          li.innerHTML = procont[i]; //为标签赋值
+          ul.appendChild(li); //添加新的子节点
+        }
+        //每添加一个字符清除一次子节点，以防累加
+        for (var i = len - 1; i >= 0; i--) {
+          ul.removeChild(ul.childNodes[i]);
+        }
+      }
+
+      function ctrl() {
+        var x = getuserinput();
+        if (x == "") {
+          hide();
+        } else {
+          show();
+        }
+      }
+
+      function hide() {
+        //做具体隐藏提示框的操作;
+        ul.style.display = "none";
+      }
+
+      function show() {
+        //做具体显示提示框的操作;
+        ul.style.display = "block";
+      }
+    </script>
+  </body>
+</html>

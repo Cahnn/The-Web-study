@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>时钟</title>
+  </head>
+  <body>
+    <p id="time"></p>
+    <script type="text/javascript">
+      function getYMD(d) {
+        var year = d.getFullYear();
+        var month = d.getMonth() + 1;
+        var date = d.getDate();
+        month = checkTime(month);
+        date = checkTime(date);
+        return year + "-" + month + "-" + date;
+      }
+
+      function getweekday(d) {
+        var weekday = new Array(7);
+        weekday[0] = "Sunday";
+        weekday[1] = "Monday";
+        weekday[2] = "Tuesday";
+        weekday[3] = "Wednesday";
+        weekday[4] = "Thursday";
+        weekday[5] = "Friday";
+        weekday[6] = "Saturday";
+        return weekday[d.getDay()];
+      }
+
+      function gettime(d) {
+        var h = d.getHours();
+        var m = d.getMinutes();
+        var s = d.getSeconds();
+        var a;
+        if (h > 12) {
+          h -= 12;
+          a = "PM";
+        } else {
+          a = "AM";
+        }
+        h = checkTime(h);
+        m = checkTime(m);
+        s = checkTime(s);
+        return h + ":" + m + ":" + s + a;
+      }
+
+      function checkTime(i) {
+        if (i < 10) {
+          i = "0" + i;
+          return i;
+        }
+        return i;
+      }
+
+      function now() {
+        var d = new Date(); //要跟setTimeout()放在一起
+        document.getElementById("time").innerHTML =
+          getYMD(d) + " " + getweekday(d) + " " + gettime(d);
+        setTimeout("now()", 1000);
+      }
+      now(); //调用
+    </script>
+  </body>
+</html>

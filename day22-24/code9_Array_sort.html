@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数组排序</title>
+  </head>
+  <body>
+    <script>
+      var arr1 = [43, 54, 4, -4, 84, 100, 58, 27, 140];
+      //将上面数组分别按从大到小以及从小到大进行排序后在console中输出
+      console.log(
+        arr1.sort(function (a, b) {
+          return b - a;
+        })
+      ); //从大到小
+      console.log(
+        arr1.sort(function (a, b) {
+          return a - b;
+        })
+      ); //从小到大
+      //用console.log()输出数组时在前面添加了字符串则输出整个字符串
+
+      var arr2 = ["apple", "dog", "cat", "car", "zoo", "orange", "airplane"];
+      //将上面数组分别按字母顺序a-z及z-a进行排序，在console中输出
+      console.log(arr2.sort()); //从a-z
+      console.log(arr2.sort().reverse()); //从z-a
+
+      var arr3 = [
+        [10, 14],
+        [16, 60],
+        [7, 44],
+        [26, 35],
+        [22, 63],
+      ];
+      //将上面的二维数组，按照每个元素中第二个数从大到小的顺序进行排序输出，输出结果应该为：
+      //[[22, 63], [16, 60], [7, 44], [26, 35], [10, 14]]
+      function arrSort(arr) {
+        arr.sort((a, b) => {
+          //ES6箭头函数写法
+          var len = Math.min(a.length, b.length);
+          for (i = 1; i < len; i++) {
+            if (a[i] !== b[i]) {
+              return b[i] - a[i];
+            }
+            return b.length > a.length;
+          }
+        });
+      }
+      arrSort(arr3);
+      console.log(arr3);
+
+      var arr4 = [
+        {
+          id: 1,
+          name: "candy",
+          value: 40,
+        },
+        {
+          id: 2,
+          name: "Simon",
+          value: 50,
+        },
+        {
+          id: 3,
+          name: "Tony",
+          value: 45,
+        },
+        {
+          id: 4,
+          name: "Annie",
+          value: 60,
+        },
+      ];
+      function valuecompare(arr) {
+        arr.sort((a, b) => {
+          var len = arr.length;
+          for (var i = 0; i < len; i++) {
+            if (a.value > b.value) {
+              return 1;
+            }
+            if (a.value < b.value) {
+              return -1;
+            }
+            return 0;
+          }
+        });
+      }
+      valuecompare(arr4);
+      console.log(arr4);
+      //将上面数组分别按元素对象的value值从小到大进行排序后输出
+    </script>
+  </body>
+</html>

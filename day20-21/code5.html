@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>改变透明度</title>
+</head>
+<body>
+    <div id="fade-obj" style="width:300px;height:300px;background:#000"></div>
+    <p></p>
+    <button id="fade-btn">淡出</button>
+    <script>
+    var alpha = 1;   
+    var odiv = document.getElementById('fade-obj');
+    var obtn = document.getElementById('fade-btn');
+    function fade_out() {
+        odiv.style.opacity = alpha  //opacity设置元素的不透明级别（0.0完全透明~1.0完全不透明）
+        alpha -= 0.1;
+        obtn.disable = true;  //设置disable属性为true即为不可用状态
+        if (alpha > 0) {
+            setTimeout('fade_out()',300)  //循环
+        }
+        else if(alpha <= 0) {
+            obtn.innerText = '淡入';
+            obtn.disable = false;
+            obtn.addEventListener('click',fade_in);
+        }     
+    }
+    function fade_in() {
+        odiv.style.opacity = alpha;
+        alpha += 0.1;
+        obtn.disable=true;
+        if (alpha < 1) {
+            setTimeout('fade_in()',300);
+        }
+        else if(alpha >= 1) {
+            obtn.innerText='淡出';
+            obtn.disable = false;
+            obtn.addEventListener('click',fade_out)
+        }
+    }
+    obtn.addEventListener('click',fade_out)
+    //addEventListener() 方法用于向指定元素添加事件句柄,事件触发时执行fade_out函数
+    </script>
+    
+</body>
+</html>

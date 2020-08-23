@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <select id="year-select">
+      <option value=""></option>
+    </select>
+
+    <select id="month-select">
+      <option value=""></option>
+    </select>
+
+    <select id="day-select">
+      <option value=""></option>
+    </select>
+
+    <select id="hour-select">
+      <option value=""></option>
+    </select>
+
+    <select id="minite-select">
+      <option value=""></option>
+    </select>
+
+    <select id="second-select">
+      <option value=""></option>
+    </select>
+
+    <script>
+      var year = document.getElementById("year-select");
+      var month = document.getElementById("month-select");
+      var day = document.getElementById("day-select");
+      var hour = document.getElementById("hour-select");
+      var minute = document.getElementById("minite-select");
+      var second = document.getElementById("second-select");
+
+      var changeDD = 1;
+
+      function getYMD() {
+        monhead = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+        var y = new Date().getFullYear();
+
+        //为年下拉框赋值
+        for (var i = y - 20; i < y + 20; i++) {
+          year.options.add(new Option(i, i));
+        }
+
+        for (var i = 1; i <= 12; i++) {
+          month.options.add(new Option(i, i));
+        }
+
+        for (var i = 0; i <= 23; i++) {
+          hour.options.add(new Option(i));
+        }
+
+        for (var i = 0; i <= 59; i++) {
+          minute.options.add(new Option(i));
+        }
+
+        for (var i = 0; i < 60; i++) {
+          second.options.add(new Option(i));
+        }
+      }
+
+      function optionsClear(d) {
+        d.options.length = 1;
+      }
+
+      //根据日期的复杂性写一个函数为日期赋值
+      function writeDay(n) {
+        optionsClear(day); //调用函数获取options.length
+        for (var i = 1; i < n + 1; i++) {
+          day.options.add(new Option(i, i));
+          if (i == changeDD) {
+            day.options[i].selected = true; //保持选中状态
+          }
+        }
+      }
+
+      function isleap(year) {
+        //判断是不是闰年的条件：整除4等于0 and 整除100不等于0 or 整除400等于0
+        return 0 == year % 4 && (year % 100 != 0 || year % 400 == 0);
+      }
+
+      //改变日下拉框的值
+      day.onchange = function D() {
+        changeDD = day.value;
+      };
+
+      //根据年份的变化调整日期的天数（二月）
+      year.onchange = function () {
+        //通过selectedIndex获取被选中选项的下标，然后获取该值
+        var monvalue = month.options[month.seclectedIndex].value;
+        if ((monvalue = "")) {
+          optionsClear(day);
+          return;
+        }
+        var n = monhead[monvalue - 1]; //获取月份对应的天数
+        if (monvalue == 2 && isleap(year.value)) n++; //闰年的二月份加一天
+        writeDay(n);
+      };
+
+      //根据月份的变化调整日期的天数
+      month.onchange = function () {
+        var yearvalue = year.options[year.selectedIndex].value;
+        if ((yearvalue = "")) {
+          optionsClear(day);
+          return;
+        }
+        var n = monhead[month.value - 1];
+        if (month.value == 2 && isleap(yearvalue)) n++;
+        writeDay(n);
+      };
+
+      //判断浏览器，IE5.0以上使用atteachEvent,其他浏览器使用addEventListener
+      //作用：可以给一个事件指派多个处理过程
+      if (document.attachEvent) {
+        window.attachEvent("onload", getYMD);
+      } else {
+        window.addEventListener("load", getYMD, false);
+      }
+
+      function checktime(x) {
+        if (x < 10) {
+          x = "0" + x;
+        }
+        return x;
+      }
+
+      //返回所选的时间
+      function getYMDselect() {
+        var str = year.value + " " + month.value + " " + day.value;
+        var timeselect = new Date(str); //转化格式，此格式才能使用获取时间的方法
+        return (
+          year.value +
+          "年" +
+          checktime(month.value) +
+          "月" +
+          checktime(day.value) +
+          "日" +
+          getweekday(timeselect.getDay()) +
+          "" +
+          checktime(hour.value) +
+          ":" +
+          checktime(minute.value) +
+          ":" +
+          checktime(second.value)
+        );
+      }
+
+      function getweekday(w) {
+        var week = [
+          "星期一",
+          "星期二",
+          "星期三",
+          "星期四",
+          "星期五",
+          "星期六",
+          "星期日",
+        ];
+        weekday = week[w];
+        return weekday;
+      }
+
+      //获取当前时间
+      function distance() {
+        var now = new Date();
+        var timeselectstr =
+          year.value +
+          "/" +
+          month.value +
+          "/" +
+          day.value +
+          " " +
+          hour.value +
+          ":" +
+          minute.value +
+          ":" +
+          second.value;
+
+        var selecttime = new Date(timeselectstr);
+        var seconddisance = now.getTime() - selecttime.getTime(); //计算从1970.1.1至今的毫秒数
+        var str;
+        if (seconddisance < 0) {
+          seconddisance = -seconddisance;
+          str = "还有";
+        } else {
+          str = "已经过去";
+        }
+        var day1 = secondDistance / 86400000;
+        var hour1 = (secondDistance % 86400000) / 3600000;
+        var minute1 = ((secondDistance % 86400000) % 3600000) / 60000;
+        var second1 = (((secondDistance % 86400000) % 3600000) % 60000) / 1000;
+        return (
+          str +
+          parseInt(day1) +
+          "天" +
+          parseInt(hour1) +
+          "小时" +
+          parseInt(minute1) +
+          "分" +
+          parseInt(second1) +
+          "秒"
+        );
+      }
+      function showtime() {
+        document.getElementById("result-wrapper").innerHTML =
+          "现在距离" + getYMDselect() + distance();
+      }
+      setInterval(showtime, 1000);
+    </script>
+
+    <p id="result-wrapper">
+      现在距离 2001年1月1日星期X HH:MM:SS 还有 X 天 X 小时 X 分 X 秒
+    </p>
+  </body>
+</html>
