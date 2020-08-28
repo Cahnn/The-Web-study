@@ -525,6 +525,6 @@ body{
     list-style: none;
     color: darkgrey;
 }
-.cont8-li{
-    margin-top: 10px;
+li{
+    padding-top: 10px;
 }
